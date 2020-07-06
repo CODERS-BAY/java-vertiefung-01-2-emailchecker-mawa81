@@ -27,7 +27,7 @@ public class EmailChecker {
     public boolean checkSpecialCharacters() {
         boolean state = false;
         for (SpecialCharacter specialCharacter : SpecialCharacter.values())
-            if (email.contains("." + specialCharacter.getSpecialCharacter())) {
+            if (email.contains(specialCharacter.getSpecialCharacter())) {
                 state = true;
             }
         return state;

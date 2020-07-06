@@ -45,6 +45,10 @@ public class EmailChecker {
         return state;
     }
 
+    public boolean checkSpace() {
+        return email.contains(" ");
+    }
+
 
     @Override
     public boolean equals(Object o) {

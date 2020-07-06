@@ -50,4 +50,11 @@ class EmailCheckerTest {
         EmailChecker email = new EmailChecker("mario@gmail.com");
         assertTrue(email.checkMinimumXsignsBeforeAt(5));
     }
+
+    @Test
+    @DisplayName("test for space in Address")
+    void checkSpaceTest() {
+        EmailChecker email = new EmailChecker("ma rio@gmail.com");
+        assertTrue(email.checkSpace());
+    }
 }

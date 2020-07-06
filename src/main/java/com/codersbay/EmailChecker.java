@@ -4,7 +4,11 @@ public class EmailChecker {
     private String email;
 
     public EmailChecker(String email) {
-        this.email = email;
+        if (email != null && !email.equals("")) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Email Address is not set or null!");
+        }
     }
 
     public boolean checkATsign() {
@@ -27,7 +31,7 @@ public class EmailChecker {
     public boolean checkSpecialCharacters() {
         boolean state = false;
         for (SpecialCharacter specialCharacter : SpecialCharacter.values())
-            if (email.contains(specialCharacter.getSpecialCharacter())) {
+            if (email.contains(String.valueOf(specialCharacter.getSpecialCharacter()))) {
                 state = true;
             }
         return state;

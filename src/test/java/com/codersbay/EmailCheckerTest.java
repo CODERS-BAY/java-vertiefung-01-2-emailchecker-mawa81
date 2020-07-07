@@ -57,4 +57,41 @@ class EmailCheckerTest {
         EmailChecker email = new EmailChecker("ma rio@gmail.com");
         assertTrue(email.checkSpace());
     }
+
+    @Test
+    @DisplayName("test for Umlauts")
+    void checkUmlautTest() {
+        EmailChecker email = new EmailChecker("märio@gmail.com");
+        assertTrue(email.checkUmlaut());
+    }
+
+    @Test
+    @DisplayName("test for sharp S")
+    void checkSharpSTest() {
+        EmailChecker email = new EmailChecker("sharpß@gmail.com");
+        assertTrue(email.checkSharpS());
+    }
+
+    @Test
+    @DisplayName("test for max length is exceeded")
+    void checkMaxLengthTest() {
+        EmailChecker email = new EmailChecker("aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com");
+        assertTrue(email.checkMaxLength(50));
+    }
+
+    @Test
+    @DisplayName("test for more than 1 @")
+    void checkForSecondAtTest() {
+        EmailChecker email = new EmailChecker("m@@@rio@gmail.com");
+        assertTrue(email.checkForSecondAt());
+    }
+
+    @Test
+    @DisplayName("test for more than 1 '.'")
+    void checkForSecondPointTest() {
+        EmailChecker email = new EmailChecker("m..rio@gmail.com");
+        assertTrue(email.checkForSecondPoint());
+    }
+
+
 }

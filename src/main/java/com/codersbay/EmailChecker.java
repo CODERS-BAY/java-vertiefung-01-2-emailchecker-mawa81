@@ -12,11 +12,7 @@ public class EmailChecker {
     }
 
     public boolean checkATsign() {
-        if (email.contains("@")) {
-            return true;
-        } else {
-            return false;
-        }
+        return email.contains("@");
     }
 
     public boolean checkDomain() {
@@ -47,6 +43,51 @@ public class EmailChecker {
 
     public boolean checkSpace() {
         return email.contains(" ");
+    }
+
+    public boolean checkUmlaut() {
+        boolean state = false;
+        for (Umlaut umlaut : Umlaut.values())
+            if (email.contains(String.valueOf(umlaut.getUmlaut()))) {
+                state = true;
+            }
+        return state;
+    }
+
+    public boolean checkSharpS() {
+        return email.contains("ß");
+    }
+
+    public boolean checkMaxLength(int lenght) {
+        return email.length() > lenght;
+    }
+
+    public boolean checkForSecondAt() {
+        boolean state = false;
+        int count = 0;
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '@') {
+                count++;
+            }
+        }
+        if (count > 1) {
+            state = true;
+        }
+        return state;
+    }
+
+    public boolean checkForSecondPoint() {
+        boolean state = false;
+        int count = 0;
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '.') {
+                count++;
+            }
+        }
+        if (count > 1) {
+            state = true;
+        }
+        return state;
     }
 
 

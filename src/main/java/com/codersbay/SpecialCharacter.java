@@ -1,7 +1,6 @@
 package com.codersbay;
 
 public enum SpecialCharacter {
-
     SPACE(' '),
     EXCLAMATION('!'),
     DOUBLE_QUOTE('\"'),

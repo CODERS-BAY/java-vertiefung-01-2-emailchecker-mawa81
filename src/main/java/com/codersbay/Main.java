@@ -10,13 +10,13 @@ public class Main {
 
         EmailChecker email = new EmailChecker("mario@gmail.com");
         System.out.println(email.toString());
-        System.out.println("have \"@\": " + email.checkATsign());
+        System.out.println("have \"@\": " + email.containsATsign());
 
         System.out.println("is listed Domain: " + email.checkDomain());
 
-        System.out.println("has unauthorized Special Character: " + email.checkSpecialCharacters());
+        System.out.println("has unauthorized Special Character: " + email.containsSpecialCharacters());
 
-        System.out.println("has x signs before \"@\": " + email.checkMinimumXsignsBeforeAt(5));
+        System.out.println("has x signs before \"@\": " + email.containsMinimumXsignsBeforeAt(5));
 
         System.out.println("umlaut: " + Umlaut.AE.toString());
 

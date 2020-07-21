@@ -27,7 +27,7 @@ class EmailCheckerTest {
     @DisplayName("test for an @ sign in the address")
     void checkATsignTest() {
         EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.checkATsign());
+        assertTrue(email.containsATsign());
     }
 
     @Test
@@ -41,56 +41,56 @@ class EmailCheckerTest {
     @DisplayName("test for unauthorized special characters")
     void checkSpecialCharactersTest() {
         EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertFalse(email.checkSpecialCharacters());
+        assertFalse(email.containsSpecialCharacters());
     }
 
     @Test
     @DisplayName("test for minimum amount of signs before @")
     void checkMinimumXsignsBeforeAtTest() {
         EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.checkMinimumXsignsBeforeAt(5));
+        assertTrue(email.containsMinimumXsignsBeforeAt(5));
     }
 
     @Test
     @DisplayName("test for space in Address")
     void checkSpaceTest() {
         EmailChecker email = new EmailChecker("ma rio@gmail.com");
-        assertTrue(email.checkSpace());
+        assertTrue(email.containsSpace());
     }
 
     @Test
     @DisplayName("test for Umlauts")
     void checkUmlautTest() {
         EmailChecker email = new EmailChecker("märio@gmail.com");
-        assertTrue(email.checkUmlaut());
+        assertTrue(email.containsUmlaut());
     }
 
     @Test
     @DisplayName("test for sharp S")
     void checkSharpSTest() {
         EmailChecker email = new EmailChecker("sharpß@gmail.com");
-        assertTrue(email.checkSharpS());
+        assertTrue(email.containsSharpS());
     }
 
     @Test
     @DisplayName("test for max length is exceeded")
     void checkMaxLengthTest() {
         EmailChecker email = new EmailChecker("aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com");
-        assertTrue(email.checkMaxLength(50));
+        assertTrue(email.containsMaxLength(50));
     }
 
     @Test
     @DisplayName("test for more than 1 @")
     void checkForSecondAtTest() {
         EmailChecker email = new EmailChecker("m@@@rio@gmail.com");
-        assertTrue(email.checkForSecondAt());
+        assertTrue(email.containsSecondAt());
     }
 
     @Test
     @DisplayName("test for more than 1 '.'")
     void checkForSecondPointTest() {
         EmailChecker email = new EmailChecker("m..rio@gmail.com");
-        assertTrue(email.checkForSecondPoint());
+        assertTrue(email.containsSecondPoint());
     }
 
 

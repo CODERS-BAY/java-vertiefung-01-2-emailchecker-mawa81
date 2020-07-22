@@ -39,67 +39,76 @@ class EmailCheckerTest {
         assertEquals(expected, email.containsATsign());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"mario@gmail.com,true", "mario@gmail.to,false"})
     @DisplayName("test whether the Domain is valid")
-    void checkDomainTest() {
-        EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.checkDomain());
+    void checkDomainTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.checkDomain());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"ma%ri$o@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for unauthorized special characters")
-    void containsSpecialCharactersTest() {
-        EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertFalse(email.containsSpecialCharacters());
+    void containsSpecialCharactersTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsSpecialCharacters());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"mario@gmail.com,true", "ma@gmail.com,false"})
     @DisplayName("test for minimum amount of signs before @")
-    void containsMinimumXsignsBeforeAtTest() {
-        EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.containsMinimumXsignsBeforeAt(5));
+    void containsMinimumXsignsBeforeAtTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsMinimumXsignsBeforeAt(5));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"ma rio@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for space in Address")
-    void containsSpaceTest() {
-        EmailChecker email = new EmailChecker("ma rio@gmail.com");
-        assertTrue(email.containsSpace());
+    void containsSpaceTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsSpace());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"märiö@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for Umlauts")
-    void containsUmlautTest() {
-        EmailChecker email = new EmailChecker("märio@gmail.com");
-        assertTrue(email.containsUmlaut());
+    void containsUmlautTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsUmlaut());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"ßupermario@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for sharp S")
-    void containsSharpSTest() {
-        EmailChecker email = new EmailChecker("sharpß@gmail.com");
-        assertTrue(email.containsSharpS());
+    void containsSharpSTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsSharpS());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for max length is exceeded")
-    void checkMaxLengthTest() {
-        EmailChecker email = new EmailChecker("aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com");
-        assertTrue(email.checkMaxLength(50));
+    void checkMaxLengthTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.checkMaxLength(50));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"m@rio@gmail.com,true", "mario@gmail.com,false"})
     @DisplayName("test for more than 1 @")
-    void containsSecondAtTest() {
-        EmailChecker email = new EmailChecker("m@@@rio@gmail.com");
-        assertTrue(email.containsSecondAt());
+    void containsSecondAtTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsSecondAt());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"mario@gmail.com.at,true", "mario@gmail.com,false"})
     @DisplayName("test for more than 1 '.'")
-    void containsSecondPointTest() {
-        EmailChecker email = new EmailChecker("m..rio@gmail.com");
-        assertTrue(email.containsSecondPoint());
+    void containsSecondPointTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsSecondPoint());
     }
 
 

@@ -2,6 +2,8 @@ package com.codersbay;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +15,9 @@ class EmailCheckerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new EmailChecker(null);
         });
+        assertDoesNotThrow(() -> {
+            new EmailChecker("mario@gmail.com");
+        });
     }
 
     @Test
@@ -21,13 +26,17 @@ class EmailCheckerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new EmailChecker("");
         });
+        assertDoesNotThrow(() -> {
+            new EmailChecker("mario@gmail.com");
+        });
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"mario@gmail.com,true", "marioagmail.com,false"})
     @DisplayName("test for an @ sign in the address")
-    void checkATsignTest() {
-        EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.checkATsign());
+    void containsATsignTest(String input, boolean expected) {
+        EmailChecker email = new EmailChecker(input);
+        assertEquals(expected, email.containsATsign());
     }
 
     @Test
@@ -39,37 +48,37 @@ class EmailCheckerTest {
 
     @Test
     @DisplayName("test for unauthorized special characters")
-    void checkSpecialCharactersTest() {
+    void containsSpecialCharactersTest() {
         EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertFalse(email.checkSpecialCharacters());
+        assertFalse(email.containsSpecialCharacters());
     }
 
     @Test
     @DisplayName("test for minimum amount of signs before @")
-    void checkMinimumXsignsBeforeAtTest() {
+    void containsMinimumXsignsBeforeAtTest() {
         EmailChecker email = new EmailChecker("mario@gmail.com");
-        assertTrue(email.checkMinimumXsignsBeforeAt(5));
+        assertTrue(email.containsMinimumXsignsBeforeAt(5));
     }
 
     @Test
     @DisplayName("test for space in Address")
-    void checkSpaceTest() {
+    void containsSpaceTest() {
         EmailChecker email = new EmailChecker("ma rio@gmail.com");
-        assertTrue(email.checkSpace());
+        assertTrue(email.containsSpace());
     }
 
     @Test
     @DisplayName("test for Umlauts")
-    void checkUmlautTest() {
+    void containsUmlautTest() {
         EmailChecker email = new EmailChecker("märio@gmail.com");
-        assertTrue(email.checkUmlaut());
+        assertTrue(email.containsUmlaut());
     }
 
     @Test
     @DisplayName("test for sharp S")
-    void checkSharpSTest() {
+    void containsSharpSTest() {
         EmailChecker email = new EmailChecker("sharpß@gmail.com");
-        assertTrue(email.checkSharpS());
+        assertTrue(email.containsSharpS());
     }
 
     @Test
@@ -81,16 +90,16 @@ class EmailCheckerTest {
 
     @Test
     @DisplayName("test for more than 1 @")
-    void checkForSecondAtTest() {
+    void containsSecondAtTest() {
         EmailChecker email = new EmailChecker("m@@@rio@gmail.com");
-        assertTrue(email.checkForSecondAt());
+        assertTrue(email.containsSecondAt());
     }
 
     @Test
     @DisplayName("test for more than 1 '.'")
-    void checkForSecondPointTest() {
+    void containsSecondPointTest() {
         EmailChecker email = new EmailChecker("m..rio@gmail.com");
-        assertTrue(email.checkForSecondPoint());
+        assertTrue(email.containsSecondPoint());
     }
 
 

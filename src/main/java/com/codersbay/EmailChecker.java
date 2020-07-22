@@ -11,7 +11,7 @@ public class EmailChecker {
         }
     }
 
-    public boolean checkATsign() {
+    public boolean containsATsign() {
         return email.contains("@");
     }
 
@@ -24,7 +24,7 @@ public class EmailChecker {
         return state;
     }
 
-    public boolean checkSpecialCharacters() {
+    public boolean containsSpecialCharacters() {
         boolean state = false;
         for (SpecialCharacter specialCharacter : SpecialCharacter.values())
             if (email.contains(String.valueOf(specialCharacter.getSpecialCharacter()))) {
@@ -33,7 +33,7 @@ public class EmailChecker {
         return state;
     }
 
-    public boolean checkMinimumXsignsBeforeAt(int signs) {
+    public boolean containsMinimumXsignsBeforeAt(int signs) {
         boolean state = false;
         if (email.indexOf('@') + 1 > signs) {
             state = true;
@@ -41,11 +41,11 @@ public class EmailChecker {
         return state;
     }
 
-    public boolean checkSpace() {
+    public boolean containsSpace() {
         return email.contains(" ");
     }
 
-    public boolean checkUmlaut() {
+    public boolean containsUmlaut() {
         boolean state = false;
         for (Umlaut umlaut : Umlaut.values())
             if (email.contains(String.valueOf(umlaut.getUmlaut()))) {
@@ -54,7 +54,7 @@ public class EmailChecker {
         return state;
     }
 
-    public boolean checkSharpS() {
+    public boolean containsSharpS() {
         return email.contains("ß");
     }
 
@@ -62,7 +62,7 @@ public class EmailChecker {
         return email.length() > lenght;
     }
 
-    public boolean checkForSecondAt() {
+    public boolean containsSecondAt() {
         boolean state = false;
         int count = 0;
         for (int i = 0; i < email.length(); i++) {
@@ -76,7 +76,7 @@ public class EmailChecker {
         return state;
     }
 
-    public boolean checkForSecondPoint() {
+    public boolean containsSecondPoint() {
         boolean state = false;
         int count = 0;
         for (int i = 0; i < email.length(); i++) {

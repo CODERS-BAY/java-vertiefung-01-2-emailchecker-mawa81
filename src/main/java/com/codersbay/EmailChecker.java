@@ -58,7 +58,7 @@ public class EmailChecker {
         return email.contains("ß");
     }
 
-    public boolean containsMaxLength(int lenght) {
+    public boolean checkMaxLength(int lenght) {
         return email.length() > lenght;
     }
 
